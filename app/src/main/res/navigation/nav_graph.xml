@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/nav_graph"
+  app:startDestination="@id/main_fragment">
+
+  <fragment
+    android:id="@+id/main_fragment"
+    android:label="@string/main_fragment_label"
+    android:name="edu.cnm.deepdive.dialogdemo.controller.MainFragment">
+
+    <action
+      android:id="@+id/navigate_to_edit_fragment"
+      app:destination="@id/edit_fragment"/>
+
+
+  </fragment>
+
+  <dialog
+    android:id="@+id/edit_fragment"
+    android:name="edu.cnm.deepdive.dialogdemo.controller.EditFragment"/>
+
+</navigation>
