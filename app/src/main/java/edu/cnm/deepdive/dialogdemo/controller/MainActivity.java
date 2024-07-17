@@ -12,10 +12,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import edu.cnm.deepdive.dialogdemo.NavGraphDirections;
 import edu.cnm.deepdive.dialogdemo.R;
 import edu.cnm.deepdive.dialogdemo.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+    ExplanationFragment.AlertDismissHandler {
 
   private static final int PERMISSIONS_REQUEST_CODE = 314159;
   private ActivityMainBinding binding;
@@ -27,11 +29,13 @@ public class MainActivity extends AppCompatActivity {
     binding = ActivityMainBinding.inflate(getLayoutInflater());
     setContentView(binding.getRoot());
     setUpNavigation();
-    boolean shouldExplain = shouldExplainCameraPermission();
-    boolean shouldRequest = shouldRequestCameraPermission();
-    Log.d(getClass().getSimpleName(), String.format("explain: %1$b; request %2$b", shouldExplain, shouldRequest));
-    // TODO: 7/15/24 Explains permissions as necessary
-    requestPermissions(new String[]{Manifest.permission.CAMERA}, PERMISSIONS_REQUEST_CODE);
+    if (shouldRequestCameraPermission()) {
+      if (shouldExplainCameraPermission()) {
+        navController.navigate(NavGraphDirections.navigateToExplanationFragment());
+      } else {
+        onDismiss();
+      }
+    }
   }
 
   @Override
@@ -70,5 +74,10 @@ public class MainActivity extends AppCompatActivity {
   private boolean shouldExplainCameraPermission() {
     return ActivityCompat.shouldShowRequestPermissionRationale(
         this, android.Manifest.permission.CAMERA);
+  }
+
+  @Override
+  public void onDismiss() {
+    requestPermissions(new String[]{Manifest.permission.CAMERA}, PERMISSIONS_REQUEST_CODE);
   }
 }

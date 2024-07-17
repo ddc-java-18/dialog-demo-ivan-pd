@@ -3,4 +3,7 @@
   <string name="main_fragment_label">Demo Main</string>
   <string name="edit_dialog_title">Note Details</string>
   <string name="notes_hint">Notes</string>
+  <string name="camera_permission_title">Camera Permission</string>
+  <string name="camera_permission_explanation">This app uses the camera to include an images with notes.</string>
+  <string name="capture_label">Capture</string>
 </resources>

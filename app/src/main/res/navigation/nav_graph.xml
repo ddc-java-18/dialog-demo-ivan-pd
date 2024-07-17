@@ -4,6 +4,10 @@
   android:id="@+id/nav_graph"
   app:startDestination="@id/main_fragment">
 
+  <action
+    android:id="@+id/navigate_to_explanation_fragment"
+    app:destination="@id/explanation_fragment"/>
+
   <fragment
     android:id="@+id/main_fragment"
     android:label="@string/main_fragment_label"
@@ -13,11 +17,14 @@
       android:id="@+id/navigate_to_edit_fragment"
       app:destination="@id/edit_fragment"/>
 
-
   </fragment>
 
   <dialog
     android:id="@+id/edit_fragment"
     android:name="edu.cnm.deepdive.dialogdemo.controller.EditFragment"/>
+
+  <dialog
+    android:id="@+id/explanation_fragment"
+    android:name="edu.cnm.deepdive.dialogdemo.controller.ExplanationFragment"/>
 
 </navigation>
