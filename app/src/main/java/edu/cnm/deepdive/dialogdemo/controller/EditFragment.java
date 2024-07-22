@@ -60,17 +60,12 @@ public class EditFragment extends BottomSheetDialogFragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     viewModel = new ViewModelProvider(requireActivity()).get(NotesViewModel.class);
-    LifecycleOwner lifecycleOwner = getViewLifecycleOwner();
     viewModel.getImageUri()
-        .observe(lifecycleOwner, (uri) -> {
+        .observe(getViewLifecycleOwner(), (uri) -> {
           if (uri != null) {
             binding.thumbnail.setImageURI(uri);
           }
           this.uri = uri;
-        });
-    viewModel.getNotes()
-        .observe(lifecycleOwner, (notes) -> {
-          Log.d(getClass().getSimpleName(), "Received note: " + notes);
         });
     takePhotoLauncher = registerForActivityResult(
         new ActivityResultContracts.TakePicture(), viewModel::confirmImageCapture);

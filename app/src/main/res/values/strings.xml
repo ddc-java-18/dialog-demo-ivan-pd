@@ -10,4 +10,6 @@
   <string name="images_subdirectory">captured-images</string>
   <string name="save_label">Save</string>
   <string name="edit_note_title">Edit Photo Note</string>
+  <string name="add_description">Add new photo note</string>
+  <string name="thumbnail_description">Photo thumbnail</string>
 </resources>
