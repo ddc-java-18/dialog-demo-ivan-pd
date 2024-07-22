@@ -1,22 +1,32 @@
 package edu.cnm.deepdive.dialogdemo.controller;
 
+import android.app.Instrumentation.ActivityResult;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import edu.cnm.deepdive.dialogdemo.databinding.FragmentEditBinding;
+import edu.cnm.deepdive.dialogdemo.service.ImageFileProvider;
 import java.io.File;
 import java.util.UUID;
 
 public class EditFragment extends BottomSheetDialogFragment {
 
+  private static final String AUTHORITY = ImageFileProvider.class.getName().toLowerCase();
+
+  private final ActivityResultLauncher<Uri> takePhotoLauncher = registerForActivityResult(
+      new ActivityResultContracts.TakePicture(), this::confirmCapture);
+
   private FragmentEditBinding binding;
+  private Uri uri;
 
   @Nullable
   @Override
@@ -41,11 +51,17 @@ public class EditFragment extends BottomSheetDialogFragment {
 
   private void takePicture() {
     Context context = requireContext();
-    File imageDir = new File(context.getFilesDir(), "images");
+    File imageDir = new File(context.getFilesDir(), "captured-images");
     //noinspection ResultOfMethodCallIgnored
     imageDir.mkdir();
     File file = new File(imageDir, UUID.randomUUID().toString());
-    Uri uri = FileProvider.getUriForFile(context, AUTHORITY, file);
-    imageDir.
+    uri = FileProvider.getUriForFile(context, AUTHORITY, file);
+    takePhotoLauncher.launch(uri);
+  }
+
+  private void confirmCapture(Boolean success) {
+    if (success) {
+      binding.thumbnail.setImageURI(uri);
+    }
   }
 }

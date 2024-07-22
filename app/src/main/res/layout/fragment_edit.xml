@@ -42,7 +42,7 @@
   <ImageView
     android:id="@+id/thumbnail"
     android:layout_width="0dp"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/thumbnail_size"
     android:layout_margin="@dimen/half_dynamic_spacing"
     android:scaleType="centerInside"
     android:adjustViewBounds="true"
