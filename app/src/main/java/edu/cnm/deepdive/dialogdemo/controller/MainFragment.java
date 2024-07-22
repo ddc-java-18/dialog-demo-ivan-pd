@@ -24,7 +24,8 @@ public class MainFragment extends Fragment {
     binding = FragmentMainBinding.inflate(inflater, container, false);
     binding.showEditFragment.setOnClickListener((v) ->
         Navigation.findNavController(binding.getRoot())
-            .navigate(MainFragmentDirections.navigateToEditFragment()));
+            .navigate(MainFragmentDirections.navigateToEditFragment()
+                .setAdditionalStuff("example argument")));
     // TODO: 7/15/24 Attach listeners to widgets in binding fields.
     return binding.getRoot();
   }
