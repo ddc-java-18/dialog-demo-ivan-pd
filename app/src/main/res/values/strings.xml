@@ -8,4 +8,6 @@
   <string name="capture_label">Capture</string>
   <string name="additional_stuff">demo</string>
   <string name="images_subdirectory">captured-images</string>
+  <string name="save_label">Save</string>
+  <string name="edit_note_title">Edit Photo Note</string>
 </resources>

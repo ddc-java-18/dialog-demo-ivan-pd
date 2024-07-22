@@ -6,6 +6,42 @@
   android:layout_height="wrap_content"
   android:padding="@dimen/half_dynamic_spacing">
 
+  <TextView
+    android:id="@+id/title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/edit_note_title"
+    android:layout_margin="@dimen/half_dynamic_spacing"
+    style="@style/MaterialAlertDialog.Material3.Title.Text.CenterStacked"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    />
+
+  <Button
+    android:id="@+id/take_picture"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/capture_label"
+    android:layout_margin="@dimen/half_dynamic_spacing"
+    app:layout_constraintTop_toTopOf="@id/thumbnail"
+    app:layout_constraintBottom_toBottomOf="@+id/thumbnail"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/thumbnail"
+    app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+  <ImageView
+    android:id="@+id/thumbnail"
+    android:layout_width="0dp"
+    android:layout_height="@dimen/thumbnail_size"
+    android:layout_margin="@dimen/half_dynamic_spacing"
+    android:scaleType="centerInside"
+    android:adjustViewBounds="true"
+    app:layout_constraintTop_toBottomOf="@id/title"
+    app:layout_constraintBottom_toTopOf="@id/notes_layout"
+    app:layout_constraintStart_toEndOf="@id/take_picture"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/notes_layout"
     android:layout_width="match_parent"
@@ -29,27 +65,30 @@
 
   </com.google.android.material.textfield.TextInputLayout>
 
+
   <Button
-    android:id="@+id/take_picture"
+    android:id="@+id/cancel"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/capture_label"
+    android:text="@android:string/cancel"
     android:layout_margin="@dimen/half_dynamic_spacing"
+    app:layout_constraintBaseline_toBaselineOf="@id/save"
     app:layout_constraintTop_toBottomOf="@id/notes_layout"
-    app:layout_constraintEnd_toEndOf="parent"
-    />
-
-  <ImageView
-    android:id="@+id/thumbnail"
-    android:layout_width="0dp"
-    android:layout_height="@dimen/thumbnail_size"
-    android:layout_margin="@dimen/half_dynamic_spacing"
-    android:scaleType="centerInside"
-    android:adjustViewBounds="true"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/take_picture"
+    app:layout_constraintEnd_toStartOf="@id/save"
+    app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+  <Button
+    android:id="@+id/save"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/save_label"
+    android:layout_margin="@dimen/half_dynamic_spacing"
     app:layout_constraintTop_toBottomOf="@id/notes_layout"
-    />
+    app:layout_constraintStart_toEndOf="@id/cancel"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
