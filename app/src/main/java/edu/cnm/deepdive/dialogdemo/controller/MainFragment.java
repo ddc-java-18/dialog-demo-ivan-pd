@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import edu.cnm.deepdive.dialogdemo.adapter.NotesAdapter;
 import edu.cnm.deepdive.dialogdemo.databinding.FragmentMainBinding;
 import edu.cnm.deepdive.dialogdemo.viewmodel.NotesViewModel;
 
@@ -38,6 +39,8 @@ public class MainFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     viewModel = new ViewModelProvider(requireActivity()).get(NotesViewModel.class);
     viewModel.getNotes().observe(getViewLifecycleOwner(), (notes) -> {
+      NotesAdapter adapter = new NotesAdapter(requireContext(), notes);
+      binding.notes.setAdapter(adapter);
       // TODO: 7/22/24 create instance of adapter, and attach to binding.notes. 
     });
   }

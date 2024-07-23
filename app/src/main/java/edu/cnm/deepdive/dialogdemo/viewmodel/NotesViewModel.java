@@ -41,6 +41,7 @@ public class NotesViewModel extends AndroidViewModel {
 
   public void addNote(Note note) {
     repository.addNote(note);
+    imageUri.setValue(null);
   }
 
 
