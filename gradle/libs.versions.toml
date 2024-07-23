@@ -28,8 +28,8 @@ fragment = { group = "androidx.fragment", name = "fragment", version.ref = "frag
 navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigation" }
 navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigation" }
 recycler-view = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recycler-view" }
-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref ="room" }
-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref ="room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

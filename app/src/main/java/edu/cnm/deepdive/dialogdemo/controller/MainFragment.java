@@ -2,6 +2,7 @@ package edu.cnm.deepdive.dialogdemo.controller;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,8 @@ public class MainFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     viewModel = new ViewModelProvider(requireActivity()).get(NotesViewModel.class);
     viewModel.getNotes().observe(getViewLifecycleOwner(), (notes) -> {
-      NotesAdapter adapter = new NotesAdapter(requireContext(), notes);
+      NotesAdapter adapter = new NotesAdapter(requireContext(), notes, (v, note, position) ->
+          Log.d(getClass().getSimpleName(), "Note clicked: " + note.getComment()));
       binding.notes.setAdapter(adapter);
       // TODO: 7/22/24 create instance of adapter, and attach to binding.notes. 
     });

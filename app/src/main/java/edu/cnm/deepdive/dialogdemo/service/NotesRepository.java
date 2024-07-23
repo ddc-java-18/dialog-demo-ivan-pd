@@ -3,15 +3,20 @@ package edu.cnm.deepdive.dialogdemo.service;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.dialogdemo.model.Note;
+import edu.cnm.deepdive.dialogdemo.model.dao.NoteDao;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class NotesRepository {
 
-  private final MutableLiveData<List<Note>> notes;
+  private final NoteDao noteDao;
+  private final ExecutorService executor;
 
   private NotesRepository() {
-    notes = new MutableLiveData<>(new LinkedList<>());
+    noteDao = NotesDatabase.getInstance().getNoteDao();
+    executor = Executors.newSingleThreadExecutor();
   }
 
   public static NotesRepository getInstance() {
@@ -19,14 +24,11 @@ public class NotesRepository {
   }
 
   public LiveData<List<Note>> getNotes() {
-    return notes;
+    return noteDao.selectAll();
   }
 
   public void addNote(Note note) {
-    List<Note> notes = this.notes.getValue();
-    //noinspection DataFlowIssue
-    notes.add(note);
-    this.notes.postValue(notes);
+    executor.execute(() -> noteDao.insert(note));
   }
 
   private static class Holder {
